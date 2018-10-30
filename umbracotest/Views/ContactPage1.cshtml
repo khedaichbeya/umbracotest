@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Master.cshtml";
+}
+
+
+    <section id="contact">
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+          <h4 class="section-title">Got a project in mind? Please contact and lets make awesome! :)</h4>
+            @Umbraco.RenderMacro("renderUmbracoForm", new {FormGuid="dbb308f2-5eb9-459f-b15f-26ef9e45836b", FormTheme="", ExcludeScripts="0"})
+        </div>
+      </div>
+</section>
+  

@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ArticlesMain>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+<section id="contact">
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+            <h3>List of all of the articles</h3>
+            @Umbraco.RenderMacro("listArticles")
+    </div>
+</div>
+        </section>

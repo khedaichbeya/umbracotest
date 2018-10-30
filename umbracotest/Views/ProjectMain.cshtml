@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ProjectMain>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+<section id="contact">
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+            <h3>All of the completed Projects:</h3>
+            
+            <h2>@Umbraco.Field("projectTitle")</h2>
+            @Umbraco.Field("projectDescription")
+           
+@{
+	var selection = Model.Content.Site().FirstChild("projectMain").Children()
+						.Where(x => x.IsVisible())
+						.Where(x => x.GetPropertyValue<String>("status") == "Completed");
+}
+
+<ul>
+	@foreach(var item in selection) 
+	{
+	<li> <a href="@item.Url">
+                @item.Name: @item.GetPropertyValue("status")</a> 
+        </li>
+	}
+</ul>
+    </div>
+    </div>
+     </section>

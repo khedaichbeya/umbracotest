@@ -1,0 +1,55 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            @{
+            var maxLevelForNav = 4;
+            var home = CurrentPage.AncestorsOrSelf(1).First();
+
+            @RenderNavForNode(home, 1)
+
+            foreach (var page in home.Children.Where("Visible"))
+            {
+            @RenderNavForNode(page, maxLevelForNav);
+            }
+            }
+        </ul>
+    </div>
+</nav>
+
+
+@helper RenderNavForNode(dynamic page, int maxLevel)
+{
+    var current = CurrentPage.Id == page.Id ? "active" : null;
+    
+	if (page.Children.Where("Visible").Any() && page.Level == 2)
+	{
+		@:<li class="dropdown @current nav-item"><a href="@page.Url" class="dropdown-toggle @current nav-link" data-toggle="dropdown" role="button" aria-expanded="false">@page.Name<span class="caret"></span></a>
+	}
+	
+	else if (page.Children.Where("Visible").Any() && page.Level > 2)
+	{
+		@:<li class="dropdown-submenu @current nav-item"><a class="@current nav-link" href="@page.Url">@page.Name</a>
+	}
+	else
+	{
+		@:<li class="nav-item"><a class="@current nav-link" href="@page.Url">@page.Name</a></li>
+	}
+	
+	
+    if (page.Children.Where("Visible").Any() && page.Level < maxLevel)
+    {
+		
+        <ul class="dropdown-menu" role="menu">
+            @foreach (var subPage in page.Children.Where("Visible"))
+            {
+                @RenderNavForNode(subPage, maxLevel)
+            }
+        </ul>
+    }
+	
+	
+}

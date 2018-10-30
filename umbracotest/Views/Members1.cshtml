@@ -1,0 +1,20 @@
+﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+<section id="contact">
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+            <div class="col-lg-6 background order-lg-2 order-1 wow fadeInRight">
+<h3 class="section-title">Active Members Details</h3>
+
+@Html.Partial("DisplayActiveMembers")
+
+
+<h3 class="section-title">Prospect Members Details</h3>
+
+@Html.Partial("DisplayProspectMembers")
+
+</section>
+</div>
+</div>
